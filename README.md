@@ -1,0 +1,1 @@
+Some example for source code analysis.
