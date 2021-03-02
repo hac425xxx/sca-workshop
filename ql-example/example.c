@@ -113,6 +113,24 @@ int ref_dec_error(int *ref, int a, int b)
     return 0;
 }
 
+int ref_bug_else(int *ref, int a, int b)
+{
+
+    ref_get(ref);
+
+    if (a == 2)
+    {
+        puts("error 2");
+        return -1;
+    }
+    else
+    {
+        ref_put(ref);
+        return -2;
+    }
+    ref_put(ref);
+    return 0;
+}
 
 int ref_no_leak(int *ref, int a, int b)
 {

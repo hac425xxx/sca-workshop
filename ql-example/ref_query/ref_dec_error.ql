@@ -11,8 +11,10 @@ class RefPutFunctionCall extends FunctionCall {
 
 class EvilIfStmt extends IfStmt {
   EvilIfStmt() {
-    not exists(ReturnStmt rs | rs = this.getAChild*()) and
-    exists(RefPutFunctionCall rpfc | this.getAChild*() = rpfc)
+    exists(RefPutFunctionCall rpfc |
+      this.getAChild*() = rpfc and
+      not exists(ReturnStmt rs | rpfc.getEnclosingBlock() = rs.getEnclosingBlock())
+    )
   }
 }
 
