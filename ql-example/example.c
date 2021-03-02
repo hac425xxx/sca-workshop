@@ -182,6 +182,34 @@ int call_our_wrapper_system_example()
     return 1;
 }
 
+int call_our_wrapper_system_strcpy_example()
+{
+
+    char *user = get_user_input_str();
+
+    char *tmp = malloc(strlen(user) + 1);
+
+    strcpy(tmp, user);
+
+    our_wrapper_system(tmp);
+    return 1;
+}
+
+int custom_memcpy(char *dst, char *src, int sz);
+
+int call_our_wrapper_system_custom_memcpy_example()
+{
+
+    char *user = get_user_input_str();
+
+    char *tmp = malloc(strlen(user) + 1);
+
+    custom_memcpy(tmp, user, strlen(user));
+
+    our_wrapper_system(tmp);
+    return 1;
+}
+
 int call_system_const_example()
 {
     system("cat /etc/xxx");

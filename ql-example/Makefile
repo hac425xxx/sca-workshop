@@ -1,2 +1,2 @@
-example:
-	gcc example.c -o example
+libexample:
+	gcc -fPIC -shared example.c -o libexample.so 
