@@ -96,7 +96,23 @@ int ref_leak(int *ref, int a, int b)
         return -1;
     }
     ref_put(ref);
+    return 0;
 }
+
+int ref_dec_error(int *ref, int a, int b)
+{
+
+    ref_get(ref);
+
+    if (a == 2)
+    {
+        puts("ref_dec_error 2");
+        ref_put(ref);
+    }
+    ref_put(ref);
+    return 0;
+}
+
 
 int ref_no_leak(int *ref, int a, int b)
 {
@@ -110,6 +126,7 @@ int ref_no_leak(int *ref, int a, int b)
         return -1;
     }
     ref_put(ref);
+    return 0;
 }
 
 int clean_data(char *input)
