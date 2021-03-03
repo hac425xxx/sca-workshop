@@ -1,4 +1,4 @@
-rm example -rf
+rm libexample.so -rf
 rm ql-example-db* -rf
 
 /home/hac425/sca/codeql/codeql database create --language=cpp -c "make" ./ql-example-db
