@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RulePack xmlns="xmlns://www.fortifysoftware.com/schema/rules">
+    <RulePackID>EA6AEBB1-F11A-44AD-B5DD-F4F66907184E</RulePackID>
+    <Version>1.0</Version>
+    <Description><![CDATA[]]></Description>
+    <Rules version="20.1">
+        <RuleDefinitions>
+            <DataflowSourceRule formatVersion="3.2" language="cpp">
+                <RuleID>AEFA1FBF-3137-4DD8-A65F-774350C97427</RuleID>
+                <FunctionIdentifier>
+                    <FunctionName>
+                        <Value>get_user_input_str</Value>
+                    </FunctionName>
+                </FunctionIdentifier>
+                <OutArguments>return</OutArguments>
+            </DataflowSourceRule>
+
+
+            <DataflowCleanseRule formatVersion="3.2" language="cpp">
+                <RuleID>3EC057A4-AE7A-42C4-BAA0-3ACB36C8AB4B</RuleID>
+                <FunctionIdentifier>
+                    <FunctionName>
+                        <Value>clean_data</Value>
+                    </FunctionName>
+                </FunctionIdentifier>
+                <OutArguments>0</OutArguments>
+            </DataflowCleanseRule>
+
+
+            <DataflowPassthroughRule formatVersion="3.2" language="cpp">
+                <RuleID>C929ED5F-9E6A-4CB5-B8AE-AAAAD3C20BDC</RuleID>
+                <FunctionIdentifier>
+                    <FunctionName>
+                        <Pattern>custom_memcpy</Pattern>
+                    </FunctionName>
+                </FunctionIdentifier>
+                <InArguments>1</InArguments>
+                <OutArguments>0</OutArguments>
+            </DataflowPassthroughRule>
+
+            <DataflowSinkRule formatVersion="3.2" language="cpp">
+                <RuleID>AA212456-92CD-48E0-A5D5-E74CC26ADDF</RuleID>
+                <Description><![CDATA[]]></Description>
+                <VulnCategory>Command Injection</VulnCategory>
+                <DefaultSeverity>4.0</DefaultSeverity>
+                <Sink>
+                    <InArguments>0</InArguments>
+                </Sink>
+                <FunctionIdentifier>
+                    <FunctionName>
+                        <Value>system</Value>
+                    </FunctionName>
+                </FunctionIdentifier>
+            </DataflowSinkRule>
+        </RuleDefinitions>
+    </Rules>
+</RulePack>
