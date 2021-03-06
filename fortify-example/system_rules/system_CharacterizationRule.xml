@@ -5,21 +5,17 @@
     <Description><![CDATA[]]></Description>
     <Rules version="20.1">
         <RuleDefinitions>
-
             <CharacterizationRule formatVersion="3.12" language="cpp">
                 <RuleID>EE905D4B-A03D-49B2-83E4-4EE043411225</RuleID>
-                <VulnKingdom>Input Validation and Representation</VulnKingdom>
-                <VulnCategory>System RCE</VulnCategory>
-                <DefaultSeverity>4.0</DefaultSeverity>
                 <Description><![CDATA[]]></Description>
-                <StructuralMatch><![CDATA[
-                
-                    FunctionCall fc:
-                        fc.name contains "clean_data" and fc.arguments[0] is [Expression e:]
-
+                <StructuralMatch>
+                    <![CDATA[
+                        FunctionCall fc:
+                            fc.name contains "clean_data" and fc.arguments[0] is [Expression e:]
                     ]]>
                 </StructuralMatch>
-                <Definition><![CDATA[
+                <Definition>
+                    <![CDATA[
                         TaintCleanse(e, {})
                     ]]>                
                 </Definition>
@@ -27,20 +23,20 @@
 
             <CharacterizationRule formatVersion="3.12" language="cpp">
                 <RuleID>EE905D4B-A03D-49B2-83E4-4EE043411224</RuleID>
-                <VulnKingdom>Input Validation and Representation</VulnKingdom>
-                <VulnCategory>System RCE</VulnCategory>
-                <DefaultSeverity>4.0</DefaultSeverity>
                 <Description><![CDATA[]]></Description>
-                <StructuralMatch><![CDATA[
-                
-                    FunctionCall fc:
-                        fc.name contains "custom_memcpy" and fc.arguments[0] is [Expression dst:]
-                        and fc.arguments[1] is [Expression src:]
-
-            ]]>                </StructuralMatch>
-                <Definition><![CDATA[
-                TaintTransfer(src, dst, {+PRIVATE})
-            ]]>                </Definition>
+                <StructuralMatch>
+                    <![CDATA[
+                        FunctionCall fc:
+                            fc.name contains "custom_memcpy" 
+                            and fc.arguments[0] is [Expression dst:]
+                            and fc.arguments[1] is [Expression src:]
+                    ]]>                
+                </StructuralMatch>
+                <Definition>
+                    <![CDATA[
+                        TaintTransfer(src, dst, {+PRIVATE})
+                    ]]>                
+                </Definition>
             </CharacterizationRule>
 
 
@@ -50,29 +46,34 @@
                 <VulnCategory>System RCE</VulnCategory>
                 <DefaultSeverity>4.0</DefaultSeverity>
                 <Description><![CDATA[]]></Description>
-                <StructuralMatch><![CDATA[
-                
-                    FunctionCall fc:
-                        fc.name contains "system" and  fc.arguments[0] is [Expression e:]
-
-            ]]>                </StructuralMatch>
-                <Definition><![CDATA[
-                TaintSink(e, [PRIVATE])
-            ]]>                </Definition>
+                <StructuralMatch>
+                    <![CDATA[
+                        FunctionCall fc:
+                            fc.name contains "system" and  fc.arguments[0] is [Expression e:]
+                    ]]>                
+                </StructuralMatch>
+                <Definition>
+                    <![CDATA[
+                        TaintSink(e, [PRIVATE])
+                    ]]>                
+                </Definition>
             </CharacterizationRule>
 
 
             <CharacterizationRule formatVersion="19.10" language="cpp">
                 <RuleID>EE5D-4B1D-A798-4D1B5E081112</RuleID>
-                <StructuralMatch><![CDATA[
-                    FunctionCall fc:
-                        fc.name contains "get_user_input_str" 
-                ]]>                </StructuralMatch>
-                <Definition><![CDATA[
-                    TaintSource(fc, {+PRIVATE})
-            ]]>                </Definition>
+                <StructuralMatch>
+                    <![CDATA[
+                        FunctionCall fc:
+                            fc.name contains "get_user_input_str" 
+                    ]]>                
+                </StructuralMatch>
+                <Definition>
+                    <![CDATA[
+                        TaintSource(fc, {+PRIVATE})
+                    ]]>                
+                </Definition>
             </CharacterizationRule>
-
 
         </RuleDefinitions>
     </Rules>
