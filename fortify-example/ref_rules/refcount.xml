@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RulePack xmlns="xmlns://www.fortifysoftware.com/schema/rules">
+    <RulePackID>EA6AEBB1-F11A-44AD-B5DD-F4F66907184E</RulePackID>
+    <Version>1.0</Version>
+    <Description><![CDATA[]]></Description>
+    <Rules version="20.1">
+        <RuleDefinitions>
+
+
+            <ControlflowRule formatVersion="3.4" language="cpp">
+                <RuleID>1650899A-908F-4301-B67A-D08E8E331122</RuleID>
+                <VulnKingdom>API Abuse</VulnKingdom>
+                <VulnCategory>Ref Leak</VulnCategory>
+                <DefaultSeverity>3.0</DefaultSeverity>
+                <Description><![CDATA[]]></Description>
+                <FunctionIdentifier id="ref_put">
+                    <FunctionName>
+                        <Pattern>ref_put</Pattern>
+                    </FunctionName>
+                </FunctionIdentifier>
+                <FunctionIdentifier id="ref_get">
+                    <FunctionName>
+                        <Pattern>ref_get</Pattern>
+                    </FunctionName>
+                </FunctionIdentifier>
+                
+                <PrimaryState>ref_add</PrimaryState>
+                <Definition>
+                    <![CDATA[
+                        state start (start);
+                        state ref_add;
+                        state ref_dec;
+                        state no_leak;
+                        state checked;
+                        state leak (error) : "ref.leak";
+                        state double_dec (error): "ref dec 2";
+
+                        var p;
+                        start -> ref_add { $ref_get(p) }
+
+                        ref_add -> ref_dec { $ref_put(p) }
+                        ref_dec -> double_dec { $ref_put(p) }
+                        ref_dec -> checked { #return() }
+                        ref_add -> leak { #return() }
+                    ]]>
+                </Definition>
+            </ControlflowRule>
+
+        </RuleDefinitions>
+    </Rules>
+</RulePack>
