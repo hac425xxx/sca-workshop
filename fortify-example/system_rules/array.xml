@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RulePack xmlns="xmlns://www.fortifysoftware.com/schema/rules">
+    <RulePackID>EA6AEBB1-F11A-44AD-B5DD-F4F66907184E</RulePackID>
+    <SKU>CUS_1</SKU>
+    <Name><![CDATA[ test 1 ]]></Name>
+    <Version>1.0</Version>
+    <Description><![CDATA[]]></Description>
+    <Rules version="20.1">
+        <RuleDefinitions>
+      
+            <StructuralRule formatVersion="3.7" language="cpp">
+                <RuleID>DA31427C-854D-40B6-AEA6-DD8D199F78F5</RuleID>
+                <VulnKingdom>Input Validation and Representation</VulnKingdom>
+                <VulnCategory>Test  Grep</VulnCategory>
+                <DefaultSeverity>3.0</DefaultSeverity>
+                <Description ref="desc.internal.cpp.out_of_bounds_read"/>
+                <Predicate>
+                    <![CDATA[
+                        ArrayAccess aa: aa.index  is [VariableAccess va:va.name == "user"]
+                    ]]>                
+                </Predicate>
+            </StructuralRule>
+
+        </RuleDefinitions>
+    </Rules>
+</RulePack>
